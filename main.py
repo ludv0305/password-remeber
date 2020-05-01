@@ -1,30 +1,31 @@
 import json
 
-valg1 = input("vil du logge ind eller oprette en bruger? ").lower()
+choice1 = input("do you want to sign in or sign up? ").lower()
 
-if valg1 == "loge ind" or valg1 == "loge på" or valg1 == "log på" or valg1 == "log ind":
+if choice1 == "sign in":
     username = open("login.json", "r")
     users = username.read()
     ask = input("hvad er dit brugernavn? ")
     if ask == users:
         print("velkommen")
-        valg2 = input("vil du finde et gammelt password eller indtaste et nyt? ")
-        if valg2 == "ny" or valg2 == "nyt" or valg2 == "indtaste et nyt" or valg2 == "en ny" or valg2 == "et nyt":
-            new_file = input("hvad skal filen hedde? (husk at afslutte med .json) ")
-            new_password = input("hvad er brugernavnet og passwordet? ")
+        choice2 = input("do you want to find a old password or enter a new one? ")
+        if choice2 == "enter" or choice2 == "enter a new one" or choice2 == "new one" or choice2 == "a new one":
+            new_file = input("what do you want to be the name of your file? (remeber to put .json at the end) ")
+            new_password = input("what is the username and password? ")
             dump2 = json.dumps(new_password)
             with open(new_file, "w") as nf:
                 nf.write(new_password)
-        elif valg2 == "finde" or valg2 == "finde et gammelt" or valg2 == "finde et gammelt password":
-            hvilket = input("hvad hedder filen som passwordet er gemt i")
-            find = open(hvilket, "r")
+        elif choice2 == "find" or choice2 == "find an old file" or choice2 == "find an old password":
+            which = input("hvad hedder filen som passwordet er gemt i")
+            find = open(which, "r")
             passwords = find.read()
             print(passwords)
-elif valg1 == "oprette ny" or valg1 == "oprette en bruger" or valg1 == "oprette en ny bruger":
-    new = input("hvad skal dit brugernavn være? ")
+    elif ask != users:
+        print("wrong password")
+elif choice1 == "sign up":
+    new = input("what should your username be? ")
     dump = json.dumps(new)
     with open("login.json", "w") as f:
         f.write(dump)
-    print("tak fordi du tilmeldte dig:)")
-    print("kør programmet igen for at gøre noget mere")
-
+    print("thanks for signin up:)")
+    print("run the program again to do more")
